@@ -9,6 +9,9 @@ classes = hasher.class
 main: $(objects) $(classes)
 	g++ $(jdk) $(lib) -o main $(objects) -ljvm
 
+recompile: clean main
+	@echo "Recompiled."
+
 hasher.class:
 	javac hasher.java
 
