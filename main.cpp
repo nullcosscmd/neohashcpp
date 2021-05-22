@@ -15,14 +15,14 @@ int main()
     vm_args.nOptions = 1;
     vm_args.options = options;
     vm_args.ignoreUnrecognized = false;
-    jint rc = JNI_CreateJavaVM(&jvm, (void **)&env, &vm_args); // YES !!
+    jint rc = JNI_CreateJavaVM(&jvm, (void **)&env, &vm_args);
 
     if (rc != JNI_OK)
     {
         exit(EXIT_FAILURE);
     }
 
-    jclass cls = env->FindClass("test");
+    jclass cls = env->FindClass("hasher");
 
     if (cls == nullptr)
     {
