@@ -1,6 +1,5 @@
 #include <iostream>
 #include <jni.h>
-#include "headers/initiator.hpp"
 
 using namespace std;
 
@@ -8,9 +7,15 @@ int main()
 {
     JavaVM *jvm;
     JNIEnv *env;
-    Initiator init;
 
-    jint rc = init.CreateJVM(jvm, env);
+    JavaVMInitArgs vm_args;
+    JavaVMOption *options = new JavaVMOption[1];
+    options[0].optionString = "-Djava.class.path=.";
+    vm_args.version = JNI_VERSION_1_6;
+    vm_args.nOptions = 1;
+    vm_args.options = options;
+    vm_args.ignoreUnrecognized = false;
+    jint rc = JNI_CreateJavaVM(&jvm, (void **)&env, &vm_args); // YES !!
 
     if (rc != JNI_OK)
     {
@@ -25,7 +30,7 @@ int main()
     }
     else
     {
-        jmethodID mid = env->GetStaticMethodID(cls, "printHash", "()V");
+        jmethodID mid = env->GetStaticMethodID(cls, "mymain", "()V");
 
         if (mid == nullptr)
         {
