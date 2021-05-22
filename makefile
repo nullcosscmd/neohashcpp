@@ -2,7 +2,7 @@ jdk = -I /lib/jvm/java-15-openjdk/include -I /lib/jvm/java-15-openjdk/include/li
 
 lib = -L /lib/jvm/java-15-openjdk/lib -L /lib/jvm/java-15-openjdk/lib/server
 
-objects = main.o
+objects = main.o initiator.o
 
 classes = test.class
 
@@ -14,6 +14,9 @@ test.class:
 
 main.o:
 	g++ $(jdk) -c main.cpp
+
+initiator.o:
+	g++ $(jdk) -c initiator.cpp
 
 clean:
 	rm -f main *.o *.class
