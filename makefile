@@ -2,18 +2,21 @@ jdk = -I /lib/jvm/java-15-openjdk/include -I /lib/jvm/java-15-openjdk/include/li
 
 lib = -L /lib/jvm/java-15-openjdk/lib -L /lib/jvm/java-15-openjdk/lib/server
 
-objects = main.o 
+objects = main.o hasher.o
 
-classes = test.class
+classes = hasher.class
 
 main: $(objects) $(classes)
 	g++ $(jdk) $(lib) -o main $(objects) -ljvm
 
-test.class:
-	javac test.java
+hasher.class:
+	javac hasher.java
 
 main.o:
 	g++ $(jdk) -c main.cpp
+
+hasher.o:
+	g++ $(jdk) -c hasher.cpp
 
 clean:
 	rm -f main *.o *.class *.log
