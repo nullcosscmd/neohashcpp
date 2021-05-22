@@ -1,6 +1,6 @@
 #include "headers/hasher.hpp"
 
-void Hasher::hash(const char input[])
+void Hasher::hash(char input[])
 {
     JavaVM *jvm;
     JNIEnv *env;
