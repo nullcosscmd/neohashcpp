@@ -4,5 +4,5 @@
 class Hasher
 {
 public:
-    void hash(char input[]);
+    void hash(const char input[]);
 };

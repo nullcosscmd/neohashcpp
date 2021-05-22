@@ -1,6 +1,6 @@
 #include "headers/hasher.hpp"
 
-void Hasher::hash(char input[])
+void Hasher::hash(const char input[])
 {
     JavaVM *jvm;
     JNIEnv *env;
@@ -27,7 +27,7 @@ void Hasher::hash(char input[])
 
         if (mid != nullptr)
         {
-            jstring hashFinalJ = (jstring)env->CallStaticObjectMethod(cls, mid, env->NewStringUTF("test"));
+            jstring hashFinalJ = (jstring)env->CallStaticObjectMethod(cls, mid, env->NewStringUTF(input));
             const char *hashFinalC = env->GetStringUTFChars(hashFinalJ, NULL);
             std::string str = std::string(hashFinalC);
             std::cout << str << std::endl;
