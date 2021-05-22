@@ -23,11 +23,14 @@ void Hasher::hash(char input[])
 
     if (cls != nullptr)
     {
-        jmethodID mid = env->GetStaticMethodID(cls, "printHash", "()V");
+        jmethodID mid = env->GetStaticMethodID(cls, "printHash", "(Ljava/lang/String;)Ljava/lang/String;");
 
         if (mid != nullptr)
         {
-            env->CallStaticVoidMethod(cls, mid);
+            jstring hashFinalJ = (jstring)env->CallStaticObjectMethod(cls, mid, env->NewStringUTF("test"));
+            const char *hashFinalC = env->GetStringUTFChars(hashFinalJ, NULL);
+            std::string str = std::string(hashFinalC);
+            std::cout << str << std::endl;
         }
     }
 

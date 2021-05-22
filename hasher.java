@@ -22,11 +22,13 @@ public class hasher {
         return hexString.toString();
     }
 
-    public static void printHash() {
+    public static String printHash(String input) {
+        String hash;
         try {
-            System.out.println("Hash: " + toHexString(getSha("test")));
+            hash = toHexString(getSha(input));
         } catch (NoSuchAlgorithmException e) {
-            System.out.println("Exception thrown: " + e);
+            hash = "Failed";
         }
+        return hash;
     }
 }
