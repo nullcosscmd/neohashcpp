@@ -11,14 +11,11 @@ int main()
     Initiator init;
 
     jint rc = init.CreateJVM(jvm, env);
+
     if (rc != JNI_OK)
     {
         exit(EXIT_FAILURE);
     }
-
-    cout << "JVM load succeeded: Version ";
-    jint ver = env->GetVersion();
-    cout << ((ver >> 16) & 0x0f) << "." << (ver & 0x0f) << endl;
 
     jclass cls = env->FindClass("test");
 
@@ -28,9 +25,8 @@ int main()
     }
     else
     {
-        cout << "Class found" << endl;
-
         jmethodID mid = env->GetStaticMethodID(cls, "mymain", "()V");
+
         if (mid == nullptr)
         {
             cerr << "ERROR: METHOD NOT FOUND" << endl;
