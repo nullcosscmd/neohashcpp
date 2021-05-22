@@ -22,7 +22,7 @@ public class test {
         return hexString.toString();
     }
 
-    public static void printHash(String args[]) {
+    public static void printHash() {
         try {
             System.out.println("Hash: " + toHexString(getSha("test")));
         } catch (NoSuchAlgorithmException e) {
