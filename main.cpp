@@ -6,34 +6,35 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
+    //Make a new hasher and a new fstream for our file.
     Hasher hasher;
-
     fstream file;
 
+    //Open the file that was specified in the first argument
     file.open(argv[1], ios::in);
 
-    string fakeLine;
-
-    int lines = 0;
-
+    //Check if we were able to open the file
     if (file.is_open())
     {
-        while (getline(file, fakeLine))
-        {
-            lines++;
-        }
-        string line[lines];
-        lines = 0;
-        while (getline(file, fakeLine))
-        {
-            line[lines] = fakeLine;
-            lines++;
-        }
-        file.close();
+        //Go to the end of the file
+        file.seekg(0, file.end);
+        //Read where the end of the file is to get the size of the file
+        int length = file.tellg();
+        //Go back to the beginning of the file
+        file.seekg(0, file.beg);
 
-        const char *s1 = line->c_str();
+        //Make a buffer to store the entire file
+        char *buffer = new char[length];
 
-        //This hash is incorrect
-        hasher.hash(s1);
+        //Read the entire file, then store it in the buffer
+        file.read(buffer, length);
+
+        //Hash the buffer
+        hasher.hash(buffer);
+    }
+    else
+    {
+        //If we weren't able to open the file, send an error to the user.
+        cout << "Failed to open file: \"" << argv[1] << "\"" << endl;
     }
 }
