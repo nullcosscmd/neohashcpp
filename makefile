@@ -19,4 +19,4 @@ initiator.o:
 	g++ $(jdk) -c initiator.cpp
 
 clean:
-	rm -f main *.o *.class
+	rm -f main *.o *.class *.log
