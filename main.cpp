@@ -30,7 +30,7 @@ int main()
     }
     else
     {
-        jmethodID mid = env->GetStaticMethodID(cls, "mymain", "()V");
+        jmethodID mid = env->GetStaticMethodID(cls, "printHash", "()V");
 
         if (mid == nullptr)
         {
